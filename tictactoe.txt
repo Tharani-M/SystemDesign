@@ -1,0 +1,46 @@
+class tictactoe:
+    def __init__ (self):
+        self.board = [[1 for i in range(3)] for j in range(3)]
+    
+        player = 'X'
+        gameover = False
+        while gameover is False:
+            self.printboard(self.board)
+            r = int(input('Enter the row number you want to insert '))
+            c = int(input('Enter the col number you want to insert '))
+        
+            if(self.board[r][c] == 1):
+                self.board[r][c] = player
+                gameover = self.haveWon(self.board,player)
+                if gameover:
+                    print(f"Player {player} has won")
+                else:
+                    if player == 'X':
+                        player = 'O'
+                    else:
+                        player = 'X'
+            else:
+                print('Invalid Move')
+    def haveWon(self,board,player):
+        #check all rows
+        for i in range(3):
+            row = 0
+            col = 0
+            for j in range(3):
+                if self.board[i][j] == player:
+                    row += 1
+                if self.board[j][i] == player:
+                    col += 1
+            if row == 3 or col == 3:
+                return True
+        if self.board[0][0] == player and self.board[1][1] == player and self.board[2][2] == player:
+            return True
+        elif self.board[0][2] == player and self.board[1][1] == player and self.board[2][0] == player:
+            return True
+        else:
+            return False
+    def printboard(self,board):
+        for i in range(3):
+            print(board[i],end='\n')
+            
+first = tictactoe()
